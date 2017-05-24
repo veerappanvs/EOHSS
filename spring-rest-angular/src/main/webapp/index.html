@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+<link rel="stylesheet"
+	href="//cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script
+	src="//cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>
+<script src="view/appl.js"></script>
+</head>
+<body>
+
+	<div > 
+
+	</div>
+	<div > 
+		<div> <p><a ><img src="images/DPHLogo.jpeg" style="width:7%;height:100px"></a></p><p> EHS Online Applications  Review</p> </div>
+	</div>
+	<div ng-controller="ApplicationsCtrl as vm"> 
+		<div ui-grid="gridOptions" class="grid" ui-grid-pagination></div>
+	</div>
+</body>
+</html>
