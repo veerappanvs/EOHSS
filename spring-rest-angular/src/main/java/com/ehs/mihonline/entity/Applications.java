@@ -4,6 +4,7 @@
 package com.ehs.mihonline.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,73 +29,107 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name="tbl_Applications", catalog="MIH", schema="dbo")// last two parameters are optional
 public class Applications {
 
-	public Applications(){
-		
-	}
 	/**
 	 * @param uniquePDFAppId
-	 * @param org
+	 * @param organization
 	 * @param submissionDate
 	 * @param contactPersonId
 	 * @param primaryMedicalDirectorId
 	 * @param proposedprogramStartDate
 	 * @param noOfEms
 	 * @param noOfEMT
-	 * @param affiliatedhealthCareorg
+	 * @param affiliatedHealthCareOrg
 	 * @param formType
 	 * @param applicationType
 	 * @param createdDate
 	 * @param modifiedDate
 	 * @param updatedBy
 	 * @param fileSubmissionDate
+	 * @param overallWorkflowStatus
+	 * @param workflowStartDate
+	 * @param workflowCompletedDate
+	 * @param workflowDetails
 	 */
-	public Applications(String uniquePDFAppId, Organization org, Date submissionDate, Person contactPersonId,
+	public Applications(String uniquePDFAppId, Organization organization, Date submissionDate, Person contactPersonId,
 			Person primaryMedicalDirectorId, Date proposedprogramStartDate, int noOfEms, int noOfEMT,
-			String affiliatedhealthCareorg, String formType, String applicationType, Date createdDate, Date modifiedDate,
-			String updatedBy, Date fileSubmissionDate) {
+			String affiliatedHealthCareOrg, String formType, String applicationType, Date createdDate,
+			Date modifiedDate, String updatedBy, Date fileSubmissionDate, String overallWorkflowStatus,
+			Date workflowStartDate, Date workflowCompletedDate, Set<WorkFlowDetails> workflowDetails) {
 		super();
 		this.uniquePDFAppId = uniquePDFAppId;
-		this.org = org;
+		this.organization = organization;
 		this.submissionDate = submissionDate;
 		this.contactPersonId = contactPersonId;
 		this.primaryMedicalDirectorId = primaryMedicalDirectorId;
 		this.proposedprogramStartDate = proposedprogramStartDate;
 		this.noOfEms = noOfEms;
 		this.noOfEMT = noOfEMT;
-		this.affiliatedHealthCareorg = affiliatedhealthCareorg;
+		this.affiliatedHealthCareOrg = affiliatedHealthCareOrg;
 		FormType = formType;
 		this.applicationType = applicationType;
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
 		this.updatedBy = updatedBy;
 		this.fileSubmissionDate = fileSubmissionDate;
+		this.overallWorkflowStatus = overallWorkflowStatus;
+		this.workflowStartDate = workflowStartDate;
+		this.workflowCompletedDate = workflowCompletedDate;
+		//this.workflowDetails = workflowDetails;
 	}
 
-	int appId;
-	String uniquePDFAppId;
-	Organization org;
+	public Applications(){
+		
+	}
+
+	private int appId;
+	private String uniquePDFAppId;
+	private Organization organization;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy HH:mm a")
-	Date submissionDate;
-	Person contactPersonId;
-	Person primaryMedicalDirectorId;
+	private Date submissionDate;
+	private Person contactPersonId;
+	private Person primaryMedicalDirectorId;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy HH:mm a")
-	Date proposedprogramStartDate;
-	int noOfEms;
-	int noOfEMT;
-	String affiliatedHealthCareorg;
-	String FormType;
-	String applicationType;
-	Date createdDate;
-	Date modifiedDate;
-	String updatedBy;
+	private Date proposedprogramStartDate;
+	private int noOfEms;
+	private int noOfEMT;
+	private String affiliatedHealthCareOrg;
+	private String FormType;
+	private String applicationType;
+	private Date createdDate;
+	private Date modifiedDate;
+	private String updatedBy;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy HH:mm a")
-	Date fileSubmissionDate;
+	private Date fileSubmissionDate;
+	private String overallWorkflowStatus;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy HH:mm a")
+	private Date workflowStartDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy HH:mm a")
+	private Date workflowCompletedDate;
+	//private Set<WorkFlowDetails>  workflowDetails;
+	
 	
 	
 	
 	
 
 
+	/**
+	 * @return the workflowDetails
+	 */
+	//@OneToMany(mappedBy = "applications", cascade = CascadeType.ALL)
+	/*@OneToMany
+	@JoinTable(name="tbl_Workflow_Details", joinColumns=@JoinColumn(name="Application_id"), inverseJoinColumns = @JoinColumn(name = "Workflow_Id"))
+	public Set<WorkFlowDetails> getWorkflowDetails() {
+		return workflowDetails;
+	}
+
+	*//**
+	 * @param workflowDetails the workflowDetails to set
+	 *//*
+	public void setWorkflowDetails(Set<WorkFlowDetails> workflowDetails) {
+		this.workflowDetails = workflowDetails;
+	}
+*/
 	/**
 	 * @return the appId
 	 */
@@ -137,7 +174,7 @@ public class Applications {
 	//@ForeignKey(name="email")
 	//@MapsId
 	public Organization getOrganization() {
-		return org;
+		return organization;
 	}
 
 
@@ -146,7 +183,7 @@ public class Applications {
 	 * @param orgId the orgId to set
 	 */
 	public void setOrganization(Organization org) {
-		this.org = org;
+		this.organization = org;
 	}
 
 
@@ -271,8 +308,8 @@ public class Applications {
 	 * @return the afterhealthCareorg
 	 */
 	@Column(name = "Aff_Health_Care_Org")
-	public String getAffiliatedrhealthCareorg() {
-		return affiliatedHealthCareorg;
+	public String getAffiliatedHealthCareOrg() {
+		return affiliatedHealthCareOrg;
 	}
 
 
@@ -280,8 +317,8 @@ public class Applications {
 	/**
 	 * @param afterhealthCareorg the afterhealthCareorg to set
 	 */
-	public void setAffiliatedrhealthCareorg(String afterhealthCareorg) {
-		this.affiliatedHealthCareorg = afterhealthCareorg;
+	public void setAffiliatedHealthCareOrg(String affiliatedHealthCareOrg) {
+		this.affiliatedHealthCareOrg = affiliatedHealthCareOrg;
 	}
 
 
@@ -310,7 +347,13 @@ public class Applications {
 	 */
 	@Column(name = "Application_Type")
 	public String getApplicationType() {
-		return applicationType;
+				switch(applicationType)
+				{
+					case "1": return "Community";
+					case "2": return "Community2";
+					case "3": return "Community3";
+				}
+				return applicationType;
 	}
 
 
@@ -399,6 +442,47 @@ public class Applications {
 	}
 
 
+
+	/**
+	 * @return the overallWorkflowStatus
+	 */
+	@Column(name="Overall_Workflow_Status")
+	public String getOverallWorkflowStatus() {
+		return overallWorkflowStatus;
+	}
+	/**
+	 * @param overallWorkflowStatus the overallWorkflowStatus to set
+	 */
+	public void setOverallWorkflowStatus(String overallWorkflowStatus) {
+		this.overallWorkflowStatus = overallWorkflowStatus;
+	}
+	/**
+	 * @return the workflowStartDate
+	 */
+	@Column(name="Workflow_Start_Date")
+	public Date getWorkflowStartDate() {
+		return workflowStartDate;
+	}
+	/**
+	 * @param workflowStartDate the workflowStartDate to set
+	 */
+	public void setWorkflowStartDate(Date workflowStartDate) {
+		this.workflowStartDate = workflowStartDate;
+	}
+	/**
+	 * @return the workflowCompletedDate
+	 */
+	@Column(name="Workflow_Completed_Date")
+	public Date getWorkflowCompletedDate() {
+		return workflowCompletedDate;
+	}
+	/**
+	 * @param workflowCompletedDate the workflowCompletedDate to set
+	 */
+	public void setWorkflowCompletedDate(Date workflowCompletedDate) {
+		this.workflowCompletedDate = workflowCompletedDate;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -407,7 +491,7 @@ public class Applications {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((FormType == null) ? 0 : FormType.hashCode());
-		result = prime * result + ((affiliatedHealthCareorg == null) ? 0 : affiliatedHealthCareorg.hashCode());
+		result = prime * result + ((affiliatedHealthCareOrg == null) ? 0 : affiliatedHealthCareOrg.hashCode());
 		result = prime * result + appId;
 		result = prime * result + ((applicationType == null) ? 0 : applicationType.hashCode());
 		result = prime * result + ((contactPersonId == null) ? 0 : contactPersonId.hashCode());
@@ -416,12 +500,15 @@ public class Applications {
 		result = prime * result + ((modifiedDate == null) ? 0 : modifiedDate.hashCode());
 		result = prime * result + noOfEMT;
 		result = prime * result + noOfEms;
-		result = prime * result + ((org == null) ? 0 : org.hashCode());
+		result = prime * result + ((organization == null) ? 0 : organization.hashCode());
+		result = prime * result + ((overallWorkflowStatus == null) ? 0 : overallWorkflowStatus.hashCode());
 		result = prime * result + ((primaryMedicalDirectorId == null) ? 0 : primaryMedicalDirectorId.hashCode());
 		result = prime * result + ((proposedprogramStartDate == null) ? 0 : proposedprogramStartDate.hashCode());
 		result = prime * result + ((submissionDate == null) ? 0 : submissionDate.hashCode());
 		result = prime * result + ((uniquePDFAppId == null) ? 0 : uniquePDFAppId.hashCode());
 		result = prime * result + ((updatedBy == null) ? 0 : updatedBy.hashCode());
+		result = prime * result + ((workflowCompletedDate == null) ? 0 : workflowCompletedDate.hashCode());
+		result = prime * result + ((workflowStartDate == null) ? 0 : workflowStartDate.hashCode());
 		return result;
 	}
 	
@@ -447,11 +534,11 @@ public class Applications {
 		} else if (!FormType.equals(other.FormType)) {
 			return false;
 		}
-		if (affiliatedHealthCareorg == null) {
-			if (other.affiliatedHealthCareorg != null) {
+		if (affiliatedHealthCareOrg == null) {
+			if (other.affiliatedHealthCareOrg != null) {
 				return false;
 			}
-		} else if (!affiliatedHealthCareorg.equals(other.affiliatedHealthCareorg)) {
+		} else if (!affiliatedHealthCareOrg.equals(other.affiliatedHealthCareOrg)) {
 			return false;
 		}
 		if (appId != other.appId) {
@@ -498,11 +585,18 @@ public class Applications {
 		if (noOfEms != other.noOfEms) {
 			return false;
 		}
-		if (org == null) {
-			if (other.org != null) {
+		if (organization == null) {
+			if (other.organization != null) {
 				return false;
 			}
-		} else if (!org.equals(other.org)) {
+		} else if (!organization.equals(other.organization)) {
+			return false;
+		}
+		if (overallWorkflowStatus == null) {
+			if (other.overallWorkflowStatus != null) {
+				return false;
+			}
+		} else if (!overallWorkflowStatus.equals(other.overallWorkflowStatus)) {
 			return false;
 		}
 		if (primaryMedicalDirectorId == null) {
@@ -540,6 +634,20 @@ public class Applications {
 		} else if (!updatedBy.equals(other.updatedBy)) {
 			return false;
 		}
+		if (workflowCompletedDate == null) {
+			if (other.workflowCompletedDate != null) {
+				return false;
+			}
+		} else if (!workflowCompletedDate.equals(other.workflowCompletedDate)) {
+			return false;
+		}
+		if (workflowStartDate == null) {
+			if (other.workflowStartDate != null) {
+				return false;
+			}
+		} else if (!workflowStartDate.equals(other.workflowStartDate)) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -553,13 +661,13 @@ public class Applications {
 		builder.append(appId);
 		builder.append(", uniquePDFAppId=");
 		builder.append(uniquePDFAppId);
-		builder.append(", org=");
-		builder.append(org);
+		builder.append(", organization=");
+		builder.append(organization);
 		builder.append(", submissionDate=");
 		builder.append(submissionDate);
 		builder.append(", contactPersonId=");
 		builder.append(contactPersonId);
-		builder.append(", primarymedicalDirectorId=");
+		builder.append(", primaryMedicalDirectorId=");
 		builder.append(primaryMedicalDirectorId);
 		builder.append(", proposedprogramStartDate=");
 		builder.append(proposedprogramStartDate);
@@ -567,8 +675,8 @@ public class Applications {
 		builder.append(noOfEms);
 		builder.append(", noOfEMT=");
 		builder.append(noOfEMT);
-		builder.append(", afterhealthCareorg=");
-		builder.append(affiliatedHealthCareorg);
+		builder.append(", affiliatedHealthCareOrg=");
+		builder.append(affiliatedHealthCareOrg);
 		builder.append(", FormType=");
 		builder.append(FormType);
 		builder.append(", applicationType=");
@@ -581,12 +689,16 @@ public class Applications {
 		builder.append(updatedBy);
 		builder.append(", fileSubmissionDate=");
 		builder.append(fileSubmissionDate);
+		builder.append(", overallWorkflowStatus=");
+		builder.append(overallWorkflowStatus);
+		builder.append(", workflowStartDate=");
+		builder.append(workflowStartDate);
+		builder.append(", workflowCompletedDate=");
+		builder.append(workflowCompletedDate);
 		builder.append("]");
 		return builder.toString();
 	}
 	
-	
-
 	
 	
 

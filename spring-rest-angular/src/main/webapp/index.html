@@ -8,15 +8,49 @@
 <script
 	src="//cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>
 <script src="view/appl.js"></script>
+<style>
+h1 {
+    color: #223688;
+}
+</style>
 </head>
 <body>
+	<table>
+  
+    <td><div> <p><a ><img src="images/DPHLogo.jpeg" style="width:50%;height:100px"></a></p> </div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><h1> EHS ONLINE APPLICATION REVIEW</h1> </td>
+    <td></td>
+     <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+    <td>
+    	
+    		<script type="text/javascript">
+    		var WinNetwork = new ActiveXObject("WScript.Network");
+    		
+			</script>
+    	
+    	
+    	<p id="date"></p>
+		<script>
+			document.getElementById("date").innerHTML = new ActiveXObject("WScript.Network");
+			
+			<!-- new Date("2015-03-25 12:00:00") -->
+		</script>
+		
+	</td>
 
-	<div > 
-
-	</div>
-	<div > 
-		<div> <p><a ><img src="images/DPHLogo.jpeg" style="width:7%;height:100px"></a></p><p> EHS Online Applications  Review</p> </div>
-	</div>
+</table>
 	<div ng-controller="ApplicationsCtrl as vm"> 
 		<div ui-grid="gridOptions" class="grid" ui-grid-pagination></div>
 	</div>
