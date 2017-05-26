@@ -26,16 +26,17 @@ app.controller('ApplicationsCtrl', ['$scope','ApplicationsService', function ($s
       { name: 'fileSubmissionDate', displayName: 'Submission Date' },
     /*  { name: 'workflowStartDate', displayName: 'Recieved Date' },*/
       { name: 'overallWorkflowStatus', displayName: 'Workflow Status'},
-     /* { name: 'button1',  displayName: 'APPROVER_1', editableCellTemplate: 'uiSelect.html',
-															          editDropdownOptionsArray: [
-															              'male',
-															              'female',
-															              'other'
-															            ]},*/
-      { name: 'button1', displayName: 'APPROVER_1'},
-      { name: 'button2', displayName: 'APPROVER_2'},
-      { name: 'button3', displayName: 'APPROVER_3'},
-      { name: 'button4', displayName: 'APPROVER_3'},
+/*      { name: 'workflowDetails[0].status', displayName: 'APPROVER_1',  editableCellTemplate: 'uiSelect.html',
+																          editDropdownOptionsArray: [
+																              'PENDING',
+																              'ONHOLD',
+																              'APPROVE', 
+																              'REJECT'
+																            ]},*/
+      { name: 'workflowDetails[1].status', displayName: 'APPROVER_1'},
+      { name: 'workflowDetails[1].status', displayName: 'APPROVER_2'},
+      { name: 'workflowDetails[2].status', displayName: 'APPROVER_3'},
+      { name: 'workflowDetails[3].status', displayName: 'APPROVER_3'},
       { name: 'button5', displayName: 'Comments'},
       { name: 'href', displayName: 'Pdf Form', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()" ng-click="openTab()"><a href="files/CommunityEMSApp.pdf">link</a></div>' }
     ],
